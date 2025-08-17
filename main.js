@@ -2,6 +2,7 @@
 const db = window.db;
 const { ref, push, onValue, update, remove } = window; // Obtiene las funciones de window
 
+// La forma correcta de obtener la referencia a la base de datos
 const contactsRef = ref(db, 'contacts');
 
 // Referencias a los elementos del DOM
