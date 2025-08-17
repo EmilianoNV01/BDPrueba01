@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Contactos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Gestión de Contactos</h1>
+
+    <form id="contactForm">
+        <input type="hidden" id="contactId">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
+        <input type="text" id="domicilio" placeholder="Domicilio" required>
+        <input type="email" id="correo" placeholder="Correo" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <button type="submit">Guardar Contacto</button>
+    </form>
+
+    <div id="contactsList">
+        </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWsbKdro68l1pfKqDpWgHpvU1AkQ2bSs8",
+    authDomain: "bdprueba01.firebaseapp.com",
+    projectId: "bdprueba01",
+    storageBucket: "bdprueba01.firebasestorage.app",
+    messagingSenderId: "93749230739",
+    appId: "1:93749230739:web:fe27f2886979d042002166",
+    measurementId: "G-TN3GDYMYND"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+    <script src="main.js"></script>
+</body>
+</html>
