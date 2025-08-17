@@ -1,6 +1,8 @@
-// Referencia a la base de datos de Firebase
-const db = firebase.database();
-const contactsRef = db.ref('contacts');
+// Referencias a la base de datos de Firebase desde el objeto window
+const db = window.db;
+const { ref, push, onValue, update, remove } = window; // Obtiene las funciones de window
+
+const contactsRef = ref(db, 'contacts');
 
 // Referencias a los elementos del DOM
 const contactForm = document.getElementById('contactForm');
@@ -19,7 +21,7 @@ contactForm.addEventListener('submit', (e) => {
 
     // Si el campo contactId está vacío, es una nueva entrada (CREATE)
     if (contactIdInput.value === '') {
-        contactsRef.push({
+        push(contactsRef, {
             nombre: nombre,
             telefono: telefono,
             domicilio: domicilio,
@@ -29,7 +31,8 @@ contactForm.addEventListener('submit', (e) => {
     } else {
         // Si tiene un ID, es una actualización (UPDATE)
         const contactId = contactIdInput.value;
-        contactsRef.child(contactId).update({
+        const contactRef = ref(db, `contacts/${contactId}`);
+        update(contactRef, {
             nombre: nombre,
             telefono: telefono,
             domicilio: domicilio,
@@ -43,7 +46,7 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // Escucha los cambios en la base de datos (READ)
-contactsRef.on('value', (snapshot) => {
+onValue(contactsRef, (snapshot) => {
     contactsList.innerHTML = ''; // Limpia la lista antes de volver a renderizar
     snapshot.forEach((childSnapshot) => {
         const key = childSnapshot.key;
@@ -89,6 +92,7 @@ function editContact(id, contact) {
 // Función para eliminar un contacto (DELETE)
 function deleteContact(id) {
     if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
-        contactsRef.child(id).remove();
+        const contactRef = ref(db, `contacts/${id}`);
+        remove(contactRef);
     }
 }
